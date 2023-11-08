@@ -24,12 +24,12 @@ database.once('connected', () => {
 app.use(express.static('public'))
 
 // Template
-//app.use(express.json());
+app.use(express.json());
 app.use(expressLayout);
 app.set('layout', './layouts/base');
 app.set('view engine', 'ejs');
 
-// Conectar as rotas
+// Rotas
 const rotas = require('./rotas/rotas');
 app.use('/', rotas);
 

@@ -5,6 +5,11 @@
   --gray: #7E7E7E;
   --gray-light: #E4E4E4;
   --red: #b30000;
+  --lavender: #EAE8FF;
+  --platinum: #d8d5db;
+  --french-gray: #adacb5;
+  --gunmetal: #2d3142;
+  --blue: #b0d7ff;
   --font-size-base: 1rem;
   --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
   --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
@@ -16,7 +21,7 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--black);
   font-size: var(--font-size-base);
-  background-color: #FAF5EE;
+  background-color: var(--platinum);
   margin: 0;
 }
 
@@ -40,6 +45,17 @@ textarea {
   margin-bottom: 1rem;
 }
 
+/* Layout */
+.container {
+  max-width: 982px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.main {
+  padding: 20px 0;
+}
+
 .btn {
   background-color: var(--black);
   border: none;
@@ -51,6 +67,8 @@ textarea {
 }
 
 .footer {
+    background-color: var(--gunmetal);
+    color: white;
     margin: 4rem;
     text-align: center;
 }
@@ -64,4 +82,47 @@ textarea {
     "logo button"
     "menu menu";
     padding-top: 10px;
+}
+
+.intro {
+    display: grid;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+.navbar {
+    background-color: var(--french-gray);
+    justify-content: center;
+    display: flex;
+    grid-area: menu;
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+  padding: 0;
+}
+
+.navbar ul a {
+  padding: 10px;
+  margin: 10%;
+  text-decoration: none;
+}
+
+.cities-container {
+  display: grid;
+  padding: 5px;
+  grid-template-columns: auto auto auto auto;
+}
+
+.cities-item {
+  background-color: var(--blue);
+  color: var(--black);
+  padding: 2%;
+  margin: 5px;
+  border-radius: 10px;
+  /*border: 1px solid var(--black);*/
+  text-align: center;
 }

@@ -2,23 +2,15 @@
 require('dotenv').config();
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
-const mongoose = require('mongoose');
+
+const connectDB = require('./models/db');
 
 // Constantes
 const PORTA = process.env.PORT || 3000;
 const app = express();
-const mongoString = process.env.MONGOOSE_URI;
 
 // Conectar o banco de dados
-mongoose.connect(mongoString);
-const database = mongoose.connection;
-
-database.on('error', (error) => {
-    console.log(error);
-});
-database.once('connected', () => {
-    console.log('Database Connected');
-});
+connectDB();
 
 // Static
 app.use(express.static('public'))

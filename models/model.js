@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 
 // Nome da Vacina
-var Vacina = new mongoose.Schema({
+var VacinaSchema = new mongoose.Schema({
     nome: String
 })
 
 // Dados sobre o ponto de vacinação
-const Ponto = new mongoose.Schema({
+const PontoSchema = new mongoose.Schema({
     endereco: {
         required: true,
         type: String
     },
     vacinas: {
-        required: true,
-        type: [Vacina]
+        type: [VacinaSchema]
     },
     mapa_url: {
         type: String
@@ -27,12 +26,17 @@ const Ponto = new mongoose.Schema({
 });
 
 // Dados da cidade
-const Cidade = new mongoose.Schema({
-    nome: {
+const CidadeSchema = new mongoose.Schema({
+    city: {
         type: String,
-        required: true
+        default: "Maceió"
     },
-    pontos: [Ponto]
+    pontos: {
+        type: [PontoSchema]}
 });
 
-module.exports = mongoose.model('Cidade', Cidade)
+const CityModel = mongoose.model('Cidade', CidadeSchema);
+const PontoModel = mongoose.model('Ponto', PontoSchema);
+const VacinaModel = mongoose.model('Vacina', VacinaSchema);
+
+module.exports = { CityModel, PontoModel, VacinaModel };

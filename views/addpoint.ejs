@@ -1,0 +1,21 @@
+<form action="/<%= cidade %>/add_ponto" method="POST">
+    <label>Endereço</label>
+    <input type="text" placeholder="Endereço" name="endereco" required>
+    
+    <label>Google Maps URL (opcional)</label>
+    <input type="url" placeholder="Google Maps URL" name="mapa_url">
+
+    <label>Horário de Abertura</label>
+    <input type="time" name="abertura">
+    <label>Horário de Fechamento</label>
+    <input type="time" name="fechamento">
+
+    <label>Vacinas oferecidas</label>
+    <!--To do: loop iterating through all vacine types stored in database-->
+    <input type="checkbox" name="coronavac">
+    <label for="coronavac">CoronaVAC</label>
+    <input type="checkbox" name="pfizer">
+    <label for="coronavac">PFizer</label>
+    
+    <button type="submit">Adicionar</button>
+</form>

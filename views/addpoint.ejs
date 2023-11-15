@@ -1,4 +1,4 @@
-<form action="/<%= cidade %>/add_ponto" method="POST">
+<form action="/add-ponto/<%= cidade %>" id="pointForm" method="POST">
     <label>Endereço</label>
     <input type="text" placeholder="Endereço" name="endereco" required>
     
@@ -19,3 +19,11 @@
     
     <button type="submit">Adicionar</button>
 </form>
+<!--
+    <script>
+    function submitPoint() {
+        var form = document.getElementById("pontoForm");
+        form.action = "add-ponto"
+    }
+</script>
+-->

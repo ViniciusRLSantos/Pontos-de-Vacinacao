@@ -1,5 +1,3 @@
-// Aqui ficarão as rotas do app
-// WIP
 const express = require('express');
 const bodyParser = require('body-parser')
 const router = express.Router();
@@ -14,7 +12,7 @@ router.get('/', async (request, response) => {
         const cidades = await Models.CityModel.find();
         response.render('index',  { cidades: cidades })
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 
@@ -37,9 +35,10 @@ router.post('/city/add', urlEncoderParser, (request, response) => {
     
 });
 
-router.post('/:city/add-ponto', async (request, response)=>{
-    var cidade = request.params.city;
+router.post('/add-ponto/:_city', urlEncoderParser, async (request, response)=>{
     try {
+        var cidade = request.params._city;
+        console.log('City ID: ', cidade);
         const ponto = new Models.PontoModel({
             endereco: request.body.endereco,
             mapa_url: request.body.mapa_url,
@@ -47,13 +46,13 @@ router.post('/:city/add-ponto', async (request, response)=>{
             fechamento: request.body.fechamento
         });
         ponto.save();
-
-        const city = await Models.CityModel.findOneAndUpdate({city: cidade}, {pontos: ponto});
+        const city = await Models.CityModel.findById(cidade);
+        city.pontos.push(ponto);
         city.save();
-        response.json(await Models.CityModel.find());
+
+        response.redirect('/')
     } catch (error) {
         console.log(error);
-        response.send(error);
     }
 });
 
@@ -64,8 +63,11 @@ router.get('/city', (request, response) => {
 });
 
 // GET
-router.get('/:city/add-ponto', (request, response) => {
-    const cidade = request.params.city;
+router.get('/add-ponto/:_city', async (request, response) => {
+    const cidade = request.params._city;
+    console.log(cidade);
+    const city_model = await Models.CityModel.findById(cidade);
+    console.log(city_model.city);
     response.render('addpoint', {cidade: cidade});
 });
 

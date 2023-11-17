@@ -1,29 +1,19 @@
-<form action="/add-ponto/<%= cidade %>" id="pointForm" method="POST">
-    <label>Endereço</label>
+<form action="/admin/add-ponto/<%= cidade %>" id="pointForm" method="POST">
+    <label>Endereço:</label>
     <input type="text" placeholder="Endereço" name="endereco" required>
-    
-    <label>Google Maps URL (opcional)</label>
-    <input type="url" placeholder="Google Maps URL" name="mapa_url">
-
-    <label>Horário de Abertura</label>
-    <input type="time" name="abertura">
-    <label>Horário de Fechamento</label>
-    <input type="time" name="fechamento">
-
-    <label>Vacinas oferecidas</label>
+    <br>
+    <label>Google Maps URL (opcional):</label>
+    <input type="url" placeholder="Google Maps URL (opcional)" name="mapa_url">
+    <br>
+    <label>Vacinas oferecidas:</label>
+    <br>
     <!--To do: loop iterating through all vacine types stored in database-->
-    <input type="checkbox" name="coronavac">
-    <label for="coronavac">CoronaVAC</label>
-    <input type="checkbox" name="pfizer">
-    <label for="coronavac">PFizer</label>
+    <% vacinas.forEach(vacina => { %>
+        <input type="checkbox" name="<%= vacina.nome %>" value="true">
+        <label for="<%= vacina.nome %>"><%= vacina.nome %></label>
+        <br>
+    <% }) %>
+    
     
     <button type="submit">Adicionar</button>
 </form>
-<!--
-    <script>
-    function submitPoint() {
-        var form = document.getElementById("pontoForm");
-        form.action = "add-ponto"
-    }
-</script>
--->

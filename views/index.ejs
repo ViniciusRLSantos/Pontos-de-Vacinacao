@@ -8,7 +8,7 @@
         <div class="cities-container">
            <% cidades.forEach(cidade => { %>
             <div class="cities-item">
-                <a href="/add-ponto/<%= cidade._id %>"><%= cidade.city %></a>
+                <a href="/city-info/<%= cidade._id %>"><%= cidade.city %></a>
             </div>
            <% }) %>
             <!--

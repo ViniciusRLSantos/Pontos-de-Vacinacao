@@ -1,0 +1,15 @@
+<div class="points-container">
+    <% cidade.pontos.forEach(ponto => { %>
+        <div class="points-item">
+            <strong>Endereço: </strong>
+            <%= ponto.endereco %>
+            <br>
+            <strong>Vacinas oferecidas: </strong>
+            <br>
+            <% ponto.vacinas.forEach(vacina => { %>
+             <%= vacina.nome %>
+             <br>
+            <% }) %>
+        </div>
+    <% }) %>
+</div>

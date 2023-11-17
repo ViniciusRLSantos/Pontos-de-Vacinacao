@@ -9,6 +9,7 @@ const connectDB = require('./models/db');
 const PORTA = process.env.PORT || 3000;
 const app = express();
 
+
 // Conectar o banco de dados
 connectDB();
 

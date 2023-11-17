@@ -7,7 +7,7 @@ var jsonParser = bodyParser.json();
 var urlEncoderParser = bodyParser.urlencoded({ extended: false })
 
 // Páginas principais
-router.get('/', async (request, response) => {    
+router.get('/', async (request, response) => {  
     try {
         const cidades = await Models.CityModel.find();
         response.render('index',  { cidades: cidades })
@@ -18,7 +18,7 @@ router.get('/', async (request, response) => {
 
 // **CRUD**
 // POST
-router.post('/city/add', urlEncoderParser, (request, response) => {
+router.post('/admin/city/add', urlEncoderParser, (request, response) => {
     var inputCityName = request.body.city_name;
     console.log(inputCityName);
     try {
@@ -35,40 +35,49 @@ router.post('/city/add', urlEncoderParser, (request, response) => {
     
 });
 
-router.post('/add-ponto/:_city', urlEncoderParser, async (request, response)=>{
-    try {
-        var cidade = request.params._city;
-        console.log('City ID: ', cidade);
-        const ponto = new Models.PontoModel({
-            endereco: request.body.endereco,
-            mapa_url: request.body.mapa_url,
-            abertura: request.body.abertura,
-            fechamento: request.body.fechamento
-        });
-        ponto.save();
-        const city = await Models.CityModel.findById(cidade);
-        city.pontos.push(ponto);
-        city.save();
+router.post('/admin/add-ponto/:_city', urlEncoderParser, async (request, response)=>{
+    var cidade = request.params._city;
+    console.log('City ID: ', cidade);
+    const ponto = new Models.PontoModel({
+        endereco: request.body.endereco,
+        mapa_url: request.body.mapa_url
+    });
+    var vac_array = []
+    for (const vacina in request.body) {
+        if (request.body[vacina] == 'true') {
+            var vac = await Models.VacinaModel.find({ nome: vacina }).exec();
+            console.log(vac[0]);
+            ponto.vacinas.push(vac[0]);
+            console.log('Adicionado: ', vacina);
+        }
+    };
+    await ponto.save();
+    console.log(vac_array);
+    const city = await Models.CityModel.findByIdAndUpdate(cidade, {$push: {pontos: ponto}});
 
-        response.redirect('/')
-    } catch (error) {
-        console.log(error);
-    }
+    response.redirect('/')
+    
 });
 
 // GET
-router.get('/city', (request, response) => {
+router.get('/admin/city', (request, response) => {
     console.log(request.body);
     response.render('city');
 });
 
 // GET
-router.get('/add-ponto/:_city', async (request, response) => {
+router.get('/add-ponto/:_city', urlEncoderParser, async (request, response) => {
+    console.log(request.body.CoronaVAC);
     const cidade = request.params._city;
-    console.log(cidade);
-    const city_model = await Models.CityModel.findById(cidade);
-    console.log(city_model.city);
-    response.render('addpoint', {cidade: cidade});
+    const vacinas = await Models.VacinaModel.find();
+    response.render('addpoint', {cidade: cidade, vacinas: vacinas});
+});
+
+router.get('/city-info/:city', async (request, response) => {
+    const city_id = request.params.city;
+    const cidade = await Models.CityModel.findById(city_id);
+
+    response.render('cityinfo', { cidade: cidade})
 });
 
 // UPDATE/PATCH

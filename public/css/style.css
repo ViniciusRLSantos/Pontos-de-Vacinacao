@@ -126,3 +126,18 @@ textarea {
   /*border: 1px solid var(--black);*/
   text-align: center;
 }
+
+.pontos-container {
+  display: grid;
+  grid-column: 1;
+  grid-row: auto;
+}
+
+.points-item {
+  background-color: var(--lavender);
+  padding: 2%;
+  margin: 5px;
+  text-align: left;
+  border-radius: 5px;
+  border-color: var(--black);
+}

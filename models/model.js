@@ -16,12 +16,6 @@ const PontoSchema = new mongoose.Schema({
     },
     mapa_url: {
         type: String
-    },
-    abertura: {
-        type: Date
-    },
-    fechamento: {
-        type: Date
     }
 });
 
@@ -32,11 +26,14 @@ const CidadeSchema = new mongoose.Schema({
         default: "Maceió"
     },
     pontos: {
-        type: [PontoSchema]}
+        type: [PontoSchema]
+    }
 });
 
 const CityModel = mongoose.model('Cidade', CidadeSchema);
 const PontoModel = mongoose.model('Ponto', PontoSchema);
 const VacinaModel = mongoose.model('Vacina', VacinaSchema);
+
+
 
 module.exports = { CityModel, PontoModel, VacinaModel };

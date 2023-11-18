@@ -6,13 +6,24 @@
     <% cidade.pontos.forEach(ponto => { %>
         <div class="points-item">
             <strong>Endereço: </strong>
-            <%= ponto.endereco %>
+            <%= ponto.endereco %>, <%= ponto.numero %> - <%= ponto.bairro %>
+            <br>
+            <strong>CNPJ: </strong>
+            <%= ponto.cnpj %>
+            <br>
+            <strong>E-Mail:</strong>
+            <%= ponto.email %>
+            <br>
+            <strong>Horários:</strong>
+            <br>
+            Abertura: <%= ponto.abertura %>
+            <br>
+            Fechamento: <%= ponto.fechamento %>
             <br>
             <strong>Vacinas oferecidas: </strong>
-            <br>
             <% ponto.vacinas.forEach(vacina => { %>
+            <br>
              <%= vacina.nome %>
-             <br>
             <% }) %>
         </div>
     <% }) %>

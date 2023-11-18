@@ -1,0 +1,15 @@
+<div class="container">
+    <ul>
+        <li>
+            <a href="/admin/cidade/add">Adicionar Cidade</a>
+        </li>
+        
+        <% cidades.forEach(cidade => { %>
+            <br>
+            <li>
+                <a href="/admin/add-ponto/<%= cidade._id %>"><%= cidade.city %>: Adicionar um ponto de Vacinação</a>
+            </li>
+        <% }) %>
+        
+    </ul>
+</div>

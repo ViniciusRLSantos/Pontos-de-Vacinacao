@@ -1,6 +1,19 @@
 <form action="/admin/add-ponto/<%= cidade %>" id="pointForm" method="POST">
     <label>Endereço:</label>
-    <input type="text" placeholder="Endereço" name="endereco" required>
+    <input type="text" placeholder="Endereço" name="endereco" size="100" required>
+    <input type="text" placeholder="Número" name="numero" width="20" size="5" maxlength="5" required>
+    <input type="text" placeholder="Bairro" name="bairro" size="70" required>
+    <br>
+    <label>CNPJ:</label>
+    <input type="text" placeholder="CNPJ" name="cnpj" oninput="formatCnpj(this)">
+    <label> E-Mail:</label>
+    <input type="email" placeholder="E-Mail" name="email">
+    <br>
+    <label>Horário de Abertura:</label>
+    <input type="time" name="abertura">
+    <br>
+    <label>Horário de Fechamento:</label>
+    <input type="time" name="fechamento">
     <br>
     <label>Google Maps URL (opcional):</label>
     <input type="url" placeholder="Google Maps URL (opcional)" name="mapa_url">

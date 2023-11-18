@@ -123,7 +123,6 @@ textarea {
   padding: 2%;
   margin: 5px;
   border-radius: 10px;
-  /*border: 1px solid var(--black);*/
   text-align: center;
 }
 
@@ -131,6 +130,7 @@ textarea {
   display: grid;
   grid-column: 1;
   grid-row: auto;
+  text-align: center;
 }
 
 .points-item {

@@ -85,13 +85,12 @@ router.get('/api/cidades/:id', async (request, response) => {
 // Adiciona uma cidade ao banco de dados
 router.post('/admin/cidade/add', urlEncoderParser, (request, response) => {
     var inputCityName = request.body.city_name;
-    console.log(inputCityName);
     try {
         if (inputCityName) {
             var cidade = new Models.CityModel({ city: inputCityName, pontos: []});
-            cidade.save();
-            console.log(`Added ${cidade.city}`);
-            response.redirect('/');
+            cidade.save().then(() => {
+                response.redirect('/');
+            });
         }
         
     } catch (error) {
@@ -122,19 +121,19 @@ router.post('/admin/add-ponto/:_city', urlEncoderParser, async (request, respons
         }
     };
     await ponto.save();
-    await Models.CityModel.findByIdAndUpdate(cidade, {$push: {pontos: ponto}});
-    response.redirect('/')
+    await Models.CityModel.findByIdAndUpdate(cidade, {$push: {pontos: ponto}}).then(() => {
+        response.redirect('/');
+    });
+    
     
 });
 
 // Forms
 router.get('/admin/cidade/add', (request, response) => {
-    console.log(request.body);
     response.render('city');
 });
 
 router.get('/admin/add-ponto/:_city', urlEncoderParser, async (request, response) => {
-    console.log(request.body.CoronaVAC);
     const cidade = request.params._city;
     const vacinas = await Models.VacinaModel.find();
     response.render('addpoint', {cidade: cidade, vacinas: vacinas});
@@ -145,6 +144,24 @@ router.get('/admin/add-ponto/:_city', urlEncoderParser, async (request, response
 // UPDATE/PATCH
 
 // DELETE
+router.get('/admin/delete/:ponto_id/:cidade_id', async (request, response) =>{
+    const id_ponto = request.params.ponto_id;
+    const id_cidade = request.params.cidade_id;
+    try {
+        const cidade = await Models.CityModel.findOne({_id: id_cidade});
+        await Models.PontoModel.findByIdAndDelete(id_ponto);
+
+        cidade.pontos.splice(cidade.pontos.findIndex(p => p._id === id_ponto), 1);
+        cidade.save().then(() => {
+            response.redirect(`/info/${id_cidade}`);
+        });
+    } catch (error) {
+        response.send(error);
+        console.log(error);
+    }
+    
+
+})
 
 
 module.exports = router;

@@ -25,7 +25,14 @@ body {
   margin: 0;
 }
 
-a { color: var(--black); }
+img {
+  vertical-align: middle;
+}
+
+a { 
+  color: var(--black);
+  vertical-align: middle;
+}
 h1 { font-size: var(--font-size-xl); }
 h2 { font-size: var(--font-size-lg); }
 h3 { font-size: var(--font-size-md); }
@@ -70,12 +77,22 @@ textarea {
   background-color: var(--red);
   
 }
+
+.warning:hover {
+  background-color: darkred;
+}
+
 .confirm {
   background-color: green;
 }
 
 .update {
-  background-color: var(--french-gray);
+  background-color: gold;
+  color: var(--black)
+}
+
+.update:hover {
+  background-color: goldenrod;
 }
 
 .footer {
@@ -143,7 +160,9 @@ textarea {
   grid-column: 1;
   grid-row: auto;
   text-align: center;
+  row-gap: 2px;
 }
+
 
 .points-item {
   background-color: var(--lavender);
@@ -152,4 +171,8 @@ textarea {
   text-align: left;
   border-radius: 5px;
   border-color: var(--black);
+}
+
+.icon {
+  margin-top: 0px;
 }

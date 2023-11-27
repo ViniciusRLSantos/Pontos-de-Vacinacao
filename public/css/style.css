@@ -37,10 +37,6 @@ h1 { font-size: var(--font-size-xl); }
 h2 { font-size: var(--font-size-lg); }
 h3 { font-size: var(--font-size-md); }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
 select,
 textarea {
   font-family: 'Poppins', sans-serif;
@@ -48,6 +44,19 @@ textarea {
   display: block;
   box-sizing: border-box;
   width: 100%;
+  padding: 0.7rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="time"],
+input[type="url"] {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  display: inline-block;
+  width: fit-content;
+  box-sizing: border-box;
   padding: 0.7rem 0.75rem;
   margin-bottom: 1rem;
 }
@@ -61,6 +70,11 @@ textarea {
 
 .main {
   padding: 20px 0;
+}
+
+.delete {
+  color: var(--red);
+  font-size: x-small;
 }
 
 .btn {

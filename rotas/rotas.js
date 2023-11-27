@@ -144,6 +144,18 @@ router.get('/admin/add-ponto/:_city', urlEncoderParser, async (request, response
 // UPDATE/PATCH
 
 // DELETE
+router.get('/admin/delete/:cidade_id', async (request, response) =>{
+    try {
+        await Models.CityModel.findByIdAndDelete(request.params.cidade_id).then(() => {
+            response.redirect('/');
+        });
+    } catch (error) {
+        response.send(error);
+        console.log(error);
+    }
+})
+
+
 router.get('/admin/delete/:ponto_id/:cidade_id', async (request, response) =>{
     const id_ponto = request.params.ponto_id;
     const id_cidade = request.params.cidade_id;
@@ -159,8 +171,6 @@ router.get('/admin/delete/:ponto_id/:cidade_id', async (request, response) =>{
         response.send(error);
         console.log(error);
     }
-    
-
 })
 
 

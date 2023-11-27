@@ -9,6 +9,8 @@
            <% cidades.forEach(cidade => { %>
             <div class="cities-item">
                 <a href="/info/<%= cidade._id %>"><%= cidade.city %></a>
+                <br>
+                <a href="/admin/delete/<%= cidade._id %>" class="delete">Delete</a>
             </div>
            <% }) %>
         </div>

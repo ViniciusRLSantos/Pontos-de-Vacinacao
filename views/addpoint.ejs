@@ -1,8 +1,9 @@
+
 <form action="/admin/add-ponto/<%= cidade %>" id="pointForm" method="POST">
     <label>Endereço:</label>
-    <input type="text" placeholder="Endereço" name="endereco" size="100" required>
-    <input type="text" placeholder="Número" name="numero" width="20" size="5" maxlength="5" required>
-    <input type="text" placeholder="Bairro" name="bairro" size="70" required>
+    <input type="text" placeholder="Endereço" name="endereco" size="25" required>
+    <input type="text" placeholder="Número" name="numero" size="5" maxlength="5" required>
+    <input type="text" placeholder="Bairro" name="bairro" size="20" required>
     <br>
     <label>CNPJ:</label>
     <input type="text" placeholder="CNPJ" name="cnpj" oninput="formatCnpj(this)">
